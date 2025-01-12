@@ -1,0 +1,37 @@
+version: '3.3'
+
+services:
+  frontend-v4:
+    build: ./Angular/practice
+    container_name: angular-app
+    ports:
+      - "4200:80"
+      
+  backend-v1:
+    build: ./spring-boot-voting-app
+    container_name: spring-boot-app
+    ports:
+      - "8080:8080"  
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-container:3306/voter_candidate_election_db
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: manager
+    depends_on:
+      - mysql-container  
+
+  mysql-container:
+    image: mysql:8.0.35
+    container_name: mysql-container
+    ports:
+      - "3306:3306"  
+    environment:
+      MYSQL_ROOT_PASSWORD: manager  #  root password
+      MYSQL_DATABASE: voter_candidate_election_db  # Database 
+      
+    volumes:
+      - mysql-data:/var/lib/mysql  #  volume for data persistence
+      - ./backup.sql:/docker-entrypoint-initdb.d/backup.sql  # Mount backup file
+
+volumes:
+  mysql-data:  # Volume name
+
