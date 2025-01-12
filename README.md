@@ -7,7 +7,7 @@ The application also includes a comprehensive statistics module, offering detail
 
 **Application Architecture**: 
 
-•	Frontend: Angular 19 as a user interface.
-•	Backend: Java 17 with Spring Boot application for RESTful APIs.
-•	Database: MySQL for persistent storage.
-•	Containerization: Docker Toolbox.
+•	**Frontend**: Angular 19 as a user interface.
+•	**Backend**: Java 17 with Spring Boot application for RESTful APIs.
+•	**Database**: MySQL for persistent storage.
+•	**Containerization**: Docker Toolbox.
