@@ -1,0 +1,69 @@
+
+<div class="container mt-4">
+    <h2 style="text-align: center;">Election Section</h2>
+  
+    <div class="card shadow-sm" id="c1" *ngIf="isVisible">
+        <div class="card-body" >
+          <div class="card-header bg-primary text-white text-center">
+            <h4 class="mb-0">Manage Election</h4>
+          </div>
+          <form class="mb-8" [formGroup]="electionForm">
+            <div class="mb-3">
+              <label for="electionType" class="form-label">Election Type</label>
+              <input id="electionType" type="text" formControlName="electionType" class="form-control" />
+              <div class="text-danger" *ngIf="electionForm.get('electionType')?.touched && electionForm.get('electionType')?.errors">
+                <div *ngIf="electionForm.get('electionType')?.errors?.['required']"> Field is required. </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="electionDate" class="form-label">Election Date</label>
+                <input id="electionDate" type="date" formControlName="electionDate" class="form-control" />
+                <div class="text-danger" *ngIf="electionForm.get('electionDate')?.touched && electionForm.get('electionDate')?.errors">
+                  <div *ngIf="electionForm.get('electionDate')?.errors?.['required']"> Field is required. </div>
+                </div>
+              </div>
+        
+              <div class="d-flex justify-content-center align-items-center gap-2">
+                <button type="submit" class="btn btn-primary" (click)="onSubmit()" *ngIf="!isEditMode">Add Record</button>
+                <button type="submit"  class="btn btn-primary" (click)="onUpdate()" *ngIf="isEditMode">Update Record</button>
+                <button type="button"  class="btn btn-danger" (click)="onCancel()" *ngIf="isEditMode">Cancel</button>
+              </div>
+          </form>
+        </div>
+      </div>
+      
+    <hr/>
+      <u><h3 style="text-align: center;">Election List</h3></u>
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <button type="button" class="btn btn-primary" (click)="toggle()">Manage Record</button>
+      </div>
+
+      <div class="table-responsive" style="max-height: 400px; overflow-y: auto; margin-bottom: 20px; width: 1300px;">
+      <table class="table table-sm table-bordered table-striped text-center">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">S.NO</th>
+            <th scope="col">Election ID</th>
+            <th scope="col">Election Type</th>
+            <th scope="col">Election Date</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let elect of elections; let i=index">
+            <td>{{i+1}}</td>
+            <td>{{elect.id}}</td>
+            <td>{{elect.electionType}}</td>
+            <td>{{elect.electionDate}}</td>
+            <td>
+                <button class="btn btn-primary btn-sm" (click)="onEdit(elect.id)" style="margin-right: 10px;">Edit</button>
+                <button class="btn btn-danger btn-sm" (click)="onRemove(elect.id)">Delete</button>
+            </td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

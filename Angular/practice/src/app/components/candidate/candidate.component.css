@@ -1,0 +1,10 @@
+#c1{
+    width: 63%;
+    margin-left:240px;
+}
+.table thead th {
+    position: sticky;
+    top: 0;
+    background-color: #f8f9fa; 
+    z-index: 1; 
+  }

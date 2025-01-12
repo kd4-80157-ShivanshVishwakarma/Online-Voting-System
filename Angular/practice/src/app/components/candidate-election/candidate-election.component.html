@@ -1,0 +1,64 @@
+<div class="container mt-4">
+<div class="card shadow-sm" id="c1" >
+    <div class="card-body" >
+      <div class="card-header bg-primary text-white text-center">
+        <h2 class="mb-0">Candidate Election Registration</h2>
+      </div>
+        <form [formGroup]="candidateElectionForm">
+            <div class="screen-container"><br/><br/>
+              <h3 class="text-center mt-3 mb-4">Register candidate for an Election</h3>
+              <p class="text-center text-muted">Select Candidate, Election to Register for Election</p>
+              <br/>
+            <div class="dropdown-container">
+                <div class="dropdown-group">
+                <label for="candidate">Candidate</label>
+                <select id="candidate" class="form-select" formControlName="candidateId" required>
+                    <option value="" disabled selected>--Select--</option>
+                    <option *ngFor="let candidate of candidates" [value]="candidate.id">{{ candidate.name }}</option>
+                </select>
+                </div>
+        
+                <div class="dropdown-group">
+                <label for="election">Election</label>
+                <select
+                    id="election"
+                    class="form-select"
+                    formControlName="electionId"
+                    required>
+                    <option value="" disabled selected>--Select--</option>
+                    <option *ngFor="let election of elections" [value]="election.id">
+                    {{ election.electionType }}
+                    </option>
+                </select>
+                </div>
+            </div>
+        
+            <div class="button-container">
+                <button type="submit" class="btn btn-primary" (click)="onSubmit()">SUBMIT</button>
+            </div>
+            </div>
+        </form>
+    </div>
+</div>
+      <hr/>
+      <u><h3 style="text-align: center;">Candidate Election List</h3></u>
+
+      <div class="table-responsive" style="max-height: 400px; overflow-y: auto; margin-bottom: 20px; width: 1300px;">
+      <table class="table table-sm table-bordered table-striped text-center">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">S.NO</th>
+            <th scope="col">Candidate Name</th>
+            <th scope="col">Election Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ce of candidateElections; let i=index">
+            <td>{{i+1}}</td>
+            <td>{{ce.candidateName}}</td>
+            <td>{{ce.electionName}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>

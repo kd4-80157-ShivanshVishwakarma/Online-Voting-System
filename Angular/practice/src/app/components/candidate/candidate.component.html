@@ -1,0 +1,124 @@
+
+<div class="container mt-4">
+    <h2 style="text-align: center;">Candidate Section</h2>
+  
+    <div class="card shadow-sm" id="c1" *ngIf="isVisible">
+        <div class="card-body" >
+          <div class="card-header bg-primary text-white text-center">
+            <h4 class="mb-0">Manage Candidate</h4>
+          </div>
+          <form class="mb-8" [formGroup]="candidateForm" >
+            <input type="hidden" name="id" forControlName="id" />
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input id="name" type="text" formControlName="name" class="form-control" />
+              <div class="text-danger" *ngIf="candidateForm.get('name')?.touched && candidateForm.get('name')?.errors">
+                <div *ngIf="candidateForm.get('name')?.errors?.['required']">Name is required.</div>
+                <div *ngIf="candidateForm.get('name')?.errors?.['minlength']">Name must be at least 3 characters long.</div>
+              </div>
+            </div>
+        
+            <div class="mb-3">
+              <label for="dob" class="form-label">Date of Birth</label>
+              <input id="dob" type="date" formControlName="dob" class="form-control" [max]="currentDate"/>
+              <div class="text-danger" *ngIf="candidateForm.get('dob')?.touched && candidateForm.get('dob')?.errors">
+                <div *ngIf="candidateForm.get('dob')?.errors?.['required']">Date of Birth is required.</div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="gender" class="form-label">Gender</label><br />
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="gender" id="male" value="Male">
+                    <label class="form-check-label" for="male">Male</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="gender" id="female" value="Female" >
+                    <label class="form-check-label" for="female">Female</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" formControlName="gender" id="other" value="Other">
+                    <label class="form-check-label" for="other">Other</label>
+                  </div>
+                  <div class="text-danger" *ngIf="candidateForm.get('gender')?.touched && candidateForm.get('gender')?.errors">
+                    <div *ngIf="candidateForm.get('gender')?.errors?.['required']">
+                      Please select a gender.
+                    </div>
+                  </div>
+              </div>
+    
+            <div class="mb-3">
+              <label for="address" class="form-label">Address</label>
+              <input id="address" type="text" formControlName="address" class="form-control" />
+              <div class="text-danger" *ngIf="candidateForm.get('address')?.touched && candidateForm.get('address')?.errors">
+                <div *ngIf="candidateForm.get('address')?.errors?.['required']"> Address is required. </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="aadhar" class="form-label">Aadhar</label>
+              <input id="aadhar" type="text" formControlName="aadhar" class="form-control" />
+              <div class="text-danger"*ngIf="candidateForm.get('aadhar')?.touched && candidateForm.get('aadhar')?.errors">
+                <div *ngIf="candidateForm.get('aadhar')?.errors?.['required']">Aadhar is required.</div>
+                <div *ngIf="candidateForm.get('aadhar')?.errors?.['pattern']">Aadhar must be a valid 12-digit number.</div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="party" class="form-label">Party</label>
+                <input id="party" type="text" formControlName="party" class="form-control" />
+                <div class="text-danger"*ngIf="candidateForm.get('party')?.touched && candidateForm.get('party')?.errors">
+                  <div *ngIf="candidateForm.get('party')?.errors?.['required']">Party is required.</div>
+                </div>
+              </div>
+              
+              <div class="d-flex justify-content-center align-items-center gap-2">
+                <button type="submit" class="btn btn-primary" (click)="onSubmit()" *ngIf="!isEditMode">Add Record</button>
+                <button type="submit"  class="btn btn-primary" (click)="onUpdate()" *ngIf="isEditMode">Update Record</button>
+                <button type="button"  class="btn btn-danger" (click)="onCancel()" *ngIf="isEditMode">Cancel</button>
+              </div>
+          </form>
+        </div>
+      </div>
+      
+    <hr/>
+      <u><h3 style="text-align: center;">Candidates List</h3></u>
+
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <button type="button" class="btn btn-primary" (click)="toggle()">Manage Record</button>
+      </div>
+
+      <div class="table-responsive" style="max-height: 400px; overflow-y: auto; margin-bottom: 20px; width: 1300px;">
+      <table class="table table-sm table-bordered table-striped text-center">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">S.NO</th>
+            <th scope="col">Candidate ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Date of Birth</th>
+            <th scope="col">Address</th>
+            <th scope="col">Aadhar</th>
+            <th scope="col">Party</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cand of candidates; let i=index">
+            <td>{{i+1}}</td>
+            <td>{{cand.id}}</td>
+            <td>{{cand.name}}</td>
+            <td>{{cand.dob}}</td>
+            <td>{{cand.address}}</td>
+            <td>{{cand.aadhar}}</td>
+            <td>{{cand.party}}</td>
+            <td>
+                <button class="btn btn-primary btn-sm" (click)="onEdit(cand.id)" style="margin-right: 10px;">Edit</button>
+                <button class="btn btn-danger btn-sm" (click)="onRemove(cand.id)">Delete</button>
+            </td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

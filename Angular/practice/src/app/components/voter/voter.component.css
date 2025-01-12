@@ -1,0 +1,16 @@
+#c1{
+    width: 63%;
+    margin-left:240px;
+}
+.table-responsive {
+    max-height: 400px; 
+    overflow-y: auto;
+    border: 1px solid #ddd; 
+  }
+
+  .table thead th {
+    position: sticky;
+    top: 0;
+    background-color: #f8f9fa; /* Background color for the fixed header */
+    z-index: 1; /* Ensure header stays above table body */
+  }

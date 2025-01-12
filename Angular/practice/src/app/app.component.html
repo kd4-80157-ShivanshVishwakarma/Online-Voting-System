@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voting</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="#"><i class="bi bi-box-arrow-in-right"></i>Online Voting System</a>
+      
+      
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item me-3">
+            <a class="nav-link text-light" routerLink="/home" routerLinkActive="active">
+            <b>Home </b>
+            </a>
+          </li>
+          <li class="nav-item me-3">
+            <a class="nav-link text-light" routerLink="/election" routerLinkActive="active">
+            <b>Election </b>
+            </a>
+          </li>
+          <li class="nav-item me-3">
+            <a class="nav-link text-light" routerLink="/voter" routerLinkActive="active">
+            <b>Voter</b>
+            </a>
+          </li>
+          <li class="nav-item me-3">
+            <a class="nav-link text-light" routerLink="/candidate" routerLinkActive="active">
+            <b>Candidate</b>
+            </a>
+          </li>
+          <li class="nav-item me-3">
+            <a class="nav-link text-light" routerLink="/candidate-election" routerLinkActive="active">
+            <b>Register for Election</b>
+            </a>
+          </li>
+          <li class="nav-item me-3">
+            <a class="nav-link text-light" routerLink="/voter-election-candidate" routerLinkActive="active">
+            <b>Vote</b>
+            </a>
+          </li>
+          <li class="nav-item me-3">
+            <a class="nav-link text-light" routerLink="/stats" routerLinkActive="active">
+            <b>Stats</b>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</body>
+</html>

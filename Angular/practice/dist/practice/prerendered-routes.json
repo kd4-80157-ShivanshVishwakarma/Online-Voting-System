@@ -1,0 +1,12 @@
+{
+  "routes": {
+    "/": {},
+    "/candidate": {},
+    "/candidate-election": {},
+    "/election": {},
+    "/home": {},
+    "/stats": {},
+    "/voter": {},
+    "/voter-election-candidate": {}
+  }
+}

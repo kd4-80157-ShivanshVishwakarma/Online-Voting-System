@@ -1,0 +1,51 @@
+.screen-container {
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  #c1{
+    width: 70%;
+    height: 100%;
+    margin-left:160px;
+}
+  .dropdown-container {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    margin: 20px 0;
+  }
+  
+  .dropdown-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .dropdown-group label {
+    margin-bottom: 5px;
+    font-size: 16px;
+  }
+  
+  .form-select {
+    width: 200px;
+    overflow-y: auto;    
+}
+
+.form-select:focus {
+    overflow: auto; 
+}
+
+  
+  .button-container {
+    margin-top: 90px;
+  }
+  
+  .btn-primary {
+    font-size: 12x;
+    cursor: pointer;
+  }
+  .table thead th {
+    position: sticky;
+    top: 0;
+    background-color: #f8f9fa; 
+    z-index: 1; 
+  }

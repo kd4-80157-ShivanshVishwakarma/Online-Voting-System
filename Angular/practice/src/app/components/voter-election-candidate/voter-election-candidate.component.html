@@ -1,0 +1,73 @@
+<div class="container mt-4">
+    <div class="card shadow-sm" id="c1" >
+        <div class="card-body" >
+            <form [formGroup]="voterElectionCandidateForm">
+              <div class="card-header bg-primary text-white text-center">
+                <h2 class="mb-0">Election Voting System</h2>
+              </div>
+                <div class="screen-container"><br/><br/>
+                  <h3 class="text-center mt-3 mb-4">Cast Your Vote</h3>
+                  <p class="text-center text-muted">
+                      Select your voter, election, and candidate to cast your vote.
+                  </p>
+                <input type="hidden" name="id" forControlName="id" />
+                <div class="dropdown-container">
+                    <div class="dropdown-group">
+                    <label for="voter">Voter</label>
+                    <select id="voter" class="form-select" formControlName="voter" required>
+                        <option value="" disabled selected>--Select--</option>
+                        <option *ngFor="let voter of voters" [value]="voter.id">{{ voter.name }}</option>
+                    </select>
+                    </div>
+            
+                    <div class="dropdown-group">
+                    <label for="election">Election</label>
+                    <select id="election" class="form-select" (change)="onElectionChange($event)" formControlName="election" required>
+                        <option value="" disabled selected>--Select--</option>
+                        <option *ngFor="let election of elections" [value]="election.id">{{ election.electionType }}</option>
+                    </select>
+                    </div>
+                    <div class="dropdown-group">
+                      <label for="candidateElection">Candidate</label>
+                      <select id="candidateElection" class="form-select" formControlName="candidateElection" required >
+                          <option value="" disabled selected>--Select--</option>
+                          <option *ngFor="let ce of candidateElections" [value]="ce.id">{{ ce.candidateName }}</option>
+                      </select>
+                      <div *ngIf="showElectionError" class="error-message">
+                          Please choose an election first.
+                      </div>
+                    </div>
+
+                </div>
+            
+                <div class="button-container">
+                    <button type="submit" class="btn btn-primary" (click)="onSubmit()">Vote</button>
+                </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr />
+    <u><h3 style="text-align: center;">Vote List</h3></u>
+    
+    <div class="table-responsive" style="max-height: 400px; overflow-y: auto; margin-bottom: 20px; width: 1300px;">
+      <table class="table table-sm table-bordered table-striped text-center">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">S.NO</th>
+            <th scope="col">Voter Name</th>
+            <th scope="col">Candidate Name</th>
+            <th scope="col">Election Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let vote of votes; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ vote.voterName }}</td>
+            <td>{{ vote.candidateName }}</td>
+            <td>{{ vote.electionType }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>

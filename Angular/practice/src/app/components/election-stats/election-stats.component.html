@@ -1,0 +1,108 @@
+
+<div class="container mt-4">
+    <h1>Election Statistics</h1>
+    <hr />
+  
+    <!-- Buttons -->
+    <div class="button-container">
+        <button class="stat-button" (click)="setActiveTab('candidatestats')">Candidates Result By Election</button>
+        <button class="stat-button" (click)="setActiveTab('voterstats')">View Voter Voting Details</button>
+        <button class="stat-button" (click)="setActiveTab('electioncountstats')">Total Voters By Election</button>
+      </div>
+    
+      <hr />
+    
+      
+      <div class="statistics-container">
+        <div *ngIf="activeTab === 'candidatestats'">
+            <div class="dropdown-container">
+                <label for="dropdown"> Choose Election </label>
+                <select id="election" class="dropdown" (change)="onElectionChange($event)" required>
+                        <option value="null" >--Select--</option>
+                        <option *ngFor="let election of elections" [value]="election.id">{{ election.electionType }}</option>
+                </select>
+            </div>
+      
+            
+            <div class="table-responsive" id="struct" *ngIf="trackChanges">
+                <table class="table table-sm table-bordered table-striped text-center">
+                  <thead class="thead-light">
+                    <tr>
+                      <th scope="col">S.NO</th>
+                      <th scope="col">Candidate Name</th>
+                      <th scope="col">Result</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let candidatestat of candidateStats; let i = index">
+                      <td>{{ i + 1 }}</td>
+                      <td>{{ candidatestat.candidateName }}</td>
+                      <td>{{ candidatestat.result }}%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+         </div>
+
+         <div *ngIf="activeTab === 'voterstats'">
+            <div class="dropdown-container">
+                <label for="dropdown"> Select Voter </label>
+                <select id="voter" class="dropdown" (change)="onVoterChange($event)" required>
+                        <option value="null" >--Select--</option>
+                        <option *ngFor="let voter of voters" [value]="voter.id">{{ voter.name }}</option>
+                </select>
+            </div>
+      
+            <div class="table-responsive" id="struct" *ngIf="trackChanges">
+                <table class="table table-sm table-bordered table-striped text-center" >
+                  <thead class="thead-light">
+                    <tr>
+                      <th scope="col">S.NO</th>
+                      <th scope="col">Candidate Name</th>
+                      <th scope="col">Election</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let voterstat of voterStats; let i = index">
+                      <td>{{ i + 1 }}</td>
+                      <td>{{ voterstat.candidateName }}</td>
+                      <td>{{ voterstat.electionType }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+         </div>
+
+         <div *ngIf="activeTab === 'electioncountstats'">
+            <div class="dropdown-container">
+                <label for="dropdown"> Choose Election </label>
+                <select id="election" class="dropdown" (change)="onElectionChange($event)" required>
+                      <option [value]="'null'" >--Select--</option>
+                      <option *ngFor="let election of elections" [value]="election.id">{{ election.electionType }}</option>
+                </select>
+            </div>
+      
+            <div class="table-responsive" id="struct" *ngIf="trackChanges">
+              <table class="table table-sm table-bordered text-center styled-table">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Count</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="font-weight: bolder;">Total Voters</td>
+                    <td>{{countStats?.totalVoterCount}}</td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: bolder;">Election Voters</td>
+                    <td>{{countStats?.electionVoterCount}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              </div>
+         </div>
+        </div>
+  </div>
+  
